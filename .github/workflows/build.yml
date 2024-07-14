@@ -31,7 +31,6 @@ jobs:
     - name: Test
       run: mvn test
 
-jobs:
   build:
 
     needs: Test
