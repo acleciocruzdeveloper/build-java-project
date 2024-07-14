@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/topics")
@@ -20,9 +22,9 @@ public class TopicsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<DataDTO> createTopic(@Valid @RequestBody TopicDTO data) {
+    public ResponseEntity<DataDTO> createTopic(@Valid @RequestBody DataDTO data) {
         try {
-            return ResponseEntity.ok().body(service.createTopic(data));
+            return ResponseEntity.ok().body(service.createTopic(data.getData()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

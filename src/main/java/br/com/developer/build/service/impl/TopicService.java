@@ -4,7 +4,7 @@ import br.com.developer.build.domain.DataEntity;
 import br.com.developer.build.domain.TopicsEntity;
 import br.com.developer.build.domain.dto.DataDTO;
 import br.com.developer.build.domain.dto.TopicDTO;
-import br.com.developer.build.repositories.ITopicsRepository;
+import br.com.developer.build.repositories.IDataRepository;
 import br.com.developer.build.service.ITopicService;
 import br.com.developer.build.utils.DataMapper;
 import jakarta.transaction.Transactional;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TopicService implements ITopicService {
 
-    private final ITopicsRepository repository;
+    private final IDataRepository repository;
     private final DataMapper dataMapper;
 
     @Override
@@ -30,8 +30,9 @@ public class TopicService implements ITopicService {
 
     @Override
     public DataDTO createTopic(TopicDTO topicDTO) {
-        DataEntity dataEntity = dataMapper.toDataEntity(topicDTO);
-        DataEntity entity = repository.save(dataEntity);
+        TopicsEntity topicsEntity = dataMapper.toTopicsEntity(topicDTO);
+        DataEntity data = DataEntity.builder().data(topicsEntity).build();
+        DataEntity entity = repository.save(data);
         return dataMapper.toDataDTO(entity);
     }
 }

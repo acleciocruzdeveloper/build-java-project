@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Data
@@ -24,5 +23,7 @@ public class DataEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private List<TopicsEntity> data;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "data_id", referencedColumnName = "id")
+    private TopicsEntity data;
 }

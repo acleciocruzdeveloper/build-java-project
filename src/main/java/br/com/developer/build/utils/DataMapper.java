@@ -5,40 +5,28 @@ import br.com.developer.build.domain.TopicsEntity;
 import br.com.developer.build.domain.dto.DataDTO;
 import br.com.developer.build.domain.dto.TopicDTO;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
-import java.util.Collections;
 
 @Component
 @RequiredArgsConstructor
 public class DataMapper {
 
+    private final ModelMapper modelMapper;
+
     public DataEntity toDataEntity(TopicDTO topicDTO) {
-        TopicsEntity topicsEntity = toTopicsEntity(topicDTO);
-        return DataEntity.builder()
-                .data(Collections.singletonList(topicsEntity))
-                .build();
+        return modelMapper.map(topicDTO, DataEntity.class);
     }
 
     public DataDTO toDataDTO(DataEntity dataEntity) {
-        return DataDTO.builder()
-                .data(dataEntity.getData().stream()
-                        .map(this::toTopicsDTO)
-                        .toList())
-                .build();
+        return modelMapper.map(dataEntity, DataDTO.class);
     }
 
-    private TopicsEntity toTopicsEntity(TopicDTO topicsDTO) {
-        return TopicsEntity.builder()
-                .id(topicsDTO.getId())
-                .topic(topicsDTO.getTopic())
-                .build();
+    public TopicsEntity toTopicsEntity(TopicDTO topicsDTO) {
+        return modelMapper.map(topicsDTO, TopicsEntity.class);
     }
 
-    private TopicDTO toTopicsDTO(TopicsEntity topicsEntity) {
-        return TopicDTO.builder()
-                .id(topicsEntity.getId())
-                .topic(topicsEntity.getTopic())
-                .build();
+    public TopicDTO toTopicsDTO(TopicsEntity topicsEntity) {
+        return modelMapper.map(topicsEntity, TopicDTO.class);
     }
 }

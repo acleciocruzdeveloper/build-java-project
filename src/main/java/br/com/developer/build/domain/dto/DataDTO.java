@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @Builder
@@ -17,5 +16,6 @@ public class DataDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -6882694438524771870L;
-    private List<TopicDTO> data;
+
+    private TopicDTO data;
 }

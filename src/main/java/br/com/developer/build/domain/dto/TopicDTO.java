@@ -24,6 +24,4 @@ public class TopicDTO implements Serializable {
     private Long id;
 
     private String topic;
-
-
 }
