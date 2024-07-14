@@ -26,7 +26,7 @@ jobs:
       run: docker-compose build
 
     - name: Create database
-      run: docker compose up -d --build devops/docker-compose.yaml
+      run: docker-compose up -d --build devops/
 
     - name: Test
       run: mvn test
