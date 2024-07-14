@@ -22,10 +22,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build database
+    - name: Build-database
       run: docker-compose build
 
-    - name: Create database
+    - name: Create-database
       run: docker-compose up -d
 
     - name: Test
